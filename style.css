@@ -1,0 +1,1009 @@
+/* ==========================================================================
+   ROHAN SHARMA (@_ROH_SHARMA_) - VERCEL / GEIST MINIMAL DESIGN SYSTEM
+   Monochromatic Palette • Clean 1px Borders • Spotlight Mouse Glows • Bidirectional Scroll Reveals
+   ========================================================================== */
+
+:root {
+  /* Vercel Pure Monochromatic System */
+  --bg-black: #000000;
+  --bg-surface: #0A0A0A;
+  --bg-card: rgba(10, 10, 10, 0.75);
+  --bg-card-hover: #111111;
+  --bg-glass: rgba(0, 0, 0, 0.85);
+
+  /* Borders & Accents */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-card: rgba(255, 255, 255, 0.12);
+  --border-bright: rgba(255, 255, 255, 0.35);
+
+  /* Typography */
+  --text-white: #EDEDED;
+  --text-pure: #FFFFFF;
+  --text-muted: #A1A1A1;
+  --text-subtle: #666666;
+
+  /* Geometry & Timing */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+  --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-reveal: 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-black);
+  color: var(--text-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ==========================================================================
+   BIDIRECTIONAL SCROLL PROGRESS INDICATOR & REVEAL ANIMATIONS
+   ========================================================================== */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #FFFFFF 0%, #888888 100%);
+  z-index: 1000;
+  transition: width 0.08s ease-out;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Hero Load Fade-In */
+.reveal-load {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(4px);
+  animation: reveal-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes reveal-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Bidirectional Scroll-Driven Reveal (Animates in on Scroll Down & Scroll Up) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  filter: blur(4px);
+  transition: opacity var(--transition-reveal), transform var(--transition-reveal), filter var(--transition-reveal);
+  will-change: opacity, transform, filter;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.reveal-child {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--transition-reveal), transform var(--transition-reveal);
+}
+
+.reveal.is-visible .reveal-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger Delays */
+.delay-1 { transition-delay: 0.08s; animation-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; animation-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; animation-delay: 0.24s; }
+.delay-4 { transition-delay: 0.32s; animation-delay: 0.32s; }
+
+/* ==========================================================================
+   AMBIENT BACKGROUND
+   ========================================================================== */
+
+.vercel-grid-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(circle at 50% 30%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.15) 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 30%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.15) 80%);
+  pointer-events: none;
+  z-index: -2;
+}
+
+.spotlight-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(160px);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.12;
+  background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0) 70%);
+}
+
+.top-center-orb {
+  width: 600px;
+  height: 350px;
+  top: -140px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.font-bold { font-weight: 700; }
+.text-white { color: #fff; }
+.w-full { width: 100%; }
+.mb-2 { margin-bottom: 0.5rem; }
+.underline { text-decoration: underline; }
+
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.vercel-title-grad {
+  background-image: linear-gradient(180deg, #FFFFFF 0%, #888888 100%);
+}
+
+/* Spotlight Card */
+.spotlight-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  z-index: 1;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.spotlight-card:hover {
+  border-color: var(--border-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  letter-spacing: -0.01em;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.6rem;
+  font-size: 0.95rem;
+}
+
+.btn-sm {
+  padding: 0.45rem 0.95rem;
+  font-size: 0.82rem;
+}
+
+.btn-white {
+  background: #FFFFFF;
+  color: #000000;
+  font-weight: 600;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2), 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.btn-white:hover {
+  background: #EAEAEA;
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4), 0 4px 14px rgba(255, 255, 255, 0.15);
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-card);
+  color: var(--text-white);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+
+.vercel-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background var(--transition-fast);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.brand-monogram {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Geist Mono', monospace;
+}
+
+.brand-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.badge-tag {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--text-subtle);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-pill);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.nav-link {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.nav-link:hover { color: #fff; }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.mobile-menu-btn {
+  display: none;
+  color: #fff;
+  padding: 0.4rem;
+}
+
+.mobile-drawer {
+  display: none;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1.5rem;
+}
+
+.mobile-drawer.open { display: block; }
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.m-link {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.m-link:hover { color: #fff; }
+
+.m-actions { margin-top: 1rem; }
+
+/* ==========================================================================
+   HERO SECTION — PARALLAX LANDSCAPE
+   ========================================================================== */
+
+.hero-section {
+  padding: 5.5rem 0 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* The landscape background layer that parallax-shifts on scroll */
+.hero-landscape {
+  position: absolute;
+  inset: -40px 0;
+  background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&q=85&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center 60%;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  z-index: 0;
+}
+
+.hero-landscape.is-loaded {
+  opacity: 0.12;
+  transform: scale(1);
+}
+
+/* Dark gradient overlay so text stays readable */
+.hero-landscape-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 70%, #000 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-center {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.shimmer-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-card);
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-family: 'Geist Mono', monospace;
+  margin-bottom: 1.75rem;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0070F3;
+  box-shadow: 0 0 8px #0070F3;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.pill-label { color: var(--text-muted); }
+.pill-divider { width: 1px; height: 12px; background: var(--border-card); }
+.pill-link {
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+.pill-link:hover { text-decoration: underline; }
+
+.hero-title {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.12;
+  margin-bottom: 1.5rem;
+}
+
+.hero-sub {
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+}
+
+.hero-btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+/* ==========================================================================
+   SECTIONS & BENTO WORK GRID
+   ========================================================================== */
+
+.section {
+  padding: 5.5rem 0;
+}
+
+.section-header {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.section-tag-mono {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-subtle);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.6rem;
+}
+
+.section-heading {
+  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+}
+
+.section-desc {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* Segmented Tabs */
+.segment-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.segment-btn {
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.45rem 1.1rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.segment-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.segment-btn.active {
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #FFFFFF;
+}
+
+/* ==========================================================================
+   INSTAGRAM POST CARD GRID
+   ========================================================================== */
+
+/* 3-column grid, last card spans full width */
+.insta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.insta-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-fast);
+}
+
+.insta-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+/* Full-width featured card */
+.insta-card-wide {
+  grid-column: 1 / -1;
+}
+
+/* Thumbnail area with real background image */
+.insta-thumb {
+  height: 240px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.insta-thumb-wide {
+  height: 300px;
+}
+
+/* Image zoom on hover */
+.insta-card:hover .insta-thumb {
+  background-position: center 45%;
+}
+
+/* Hover overlay with Instagram CTA */
+.insta-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  backdrop-filter: blur(2px);
+}
+
+.insta-hover-overlay i {
+  width: 28px;
+  height: 28px;
+}
+
+.insta-card:hover .insta-hover-overlay {
+  opacity: 1;
+}
+
+/* Photo / Reel badge */
+.insta-type-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.18rem 0.55rem;
+  border-radius: var(--radius-pill);
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.insta-type-badge i {
+  width: 11px;
+  height: 11px;
+}
+
+.reel-badge {
+  color: #a78bfa;
+  border-color: rgba(167, 139, 250, 0.3);
+}
+
+/* Caption below image */
+.insta-caption {
+  padding: 1rem 1.25rem 1.25rem;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  flex-grow: 1;
+}
+
+.insta-caption .category-mono {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.insta-caption .card-h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+/* Instagram CTA button row */
+.insta-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+/* Keep old thumb styles in case they're referenced, just hidden */
+.thumb-ladakh, .thumb-coast, .thumb-city, .thumb-peaks, .thumb-cliffs, .thumb-dusk {
+  display: none;
+}
+
+
+
+/* ==========================================================================
+   ABOUT ROHAN CARD
+   ========================================================================== */
+
+.about-card {
+  padding: 2.75rem 2.25rem;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.about-avatar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.avatar-box {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.avatar-initials {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  font-family: 'Geist Mono', monospace;
+}
+
+.avatar-meta h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.text-muted-link {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.text-muted-link:hover { color: #fff; text-decoration: underline; }
+
+.about-heading {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.85rem;
+}
+
+.about-p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 0.85rem;
+}
+
+.about-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.a-tag {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+}
+
+/* ==========================================================================
+   INQUIRY SECTION
+   ========================================================================== */
+
+.terminal-card {
+  padding: 2.75rem;
+}
+
+.terminal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.terminal-heading {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+}
+
+.terminal-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.terminal-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.channel-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.channel-row i {
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+}
+
+.ch-lbl {
+  display: block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text-subtle);
+}
+
+.ch-val {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.ch-val:hover { text-decoration: underline; }
+
+.vercel-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-col label, .form-group-full label {
+  display: block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.v-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.95rem;
+  font-size: 0.88rem;
+  color: #fff;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+}
+
+.v-input:focus {
+  outline: none;
+  border-color: #FFFFFF;
+  box-shadow: 0 0 0 1px #FFFFFF;
+}
+
+.v-textarea {
+  resize: vertical;
+  min-height: 85px;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.vercel-footer {
+  background: var(--bg-black);
+  border-top: 1px solid var(--border-subtle);
+  padding: 3rem 0 2rem;
+  font-size: 0.8rem;
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-white);
+  font-weight: 600;
+}
+
+.brand-monogram-small {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+}
+
+.footer-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-nav a {
+  color: var(--text-muted);
+}
+
+.footer-nav a:hover { color: #fff; }
+
+.footer-meta {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-subtle);
+}
+
+/* ==========================================================================
+   TOAST
+   ========================================================================== */
+
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toast {
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 0.75rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.82rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: slide-toast 0.2s ease;
+}
+
+@keyframes slide-toast {
+  from { transform: translateY(15px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; text-align: center; }
+  .about-tags-row { justify-content: center; }
+  .insta-grid { grid-template-columns: repeat(2, 1fr); }
+  .insta-card-wide { grid-column: span 2; }
+  .terminal-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .nav-links, .nav-actions .btn-sm { display: none; }
+  .mobile-menu-btn { display: block; }
+  .insta-grid { grid-template-columns: 1fr; }
+  .insta-card-wide { grid-column: 1; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-row { flex-direction: column; text-align: center; }
+}
