@@ -20,23 +20,42 @@ document.addEventListener('DOMContentLoaded', () => {
       heroLandscape.classList.add('is-loaded');
     }, 300);
 
-    // Parallax: as user scrolls down, shift the background-position upward
+    // Parallax + scroll-driven opacity reveal
     function updateLandscapeParallax() {
       const scrollY = window.scrollY;
       const heroSection = heroLandscape.closest('section');
       if (!heroSection) return;
-      const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+      const heroHeight = heroSection.offsetHeight;
+      const heroBottom = heroSection.offsetTop + heroHeight;
 
-      // Only apply while hero is in view
       if (scrollY <= heroBottom) {
-        // Move background opposite to scroll direction (true parallax feel)
+        // Parallax shift — image moves slower than scroll (depth effect)
         const shift = scrollY * 0.25;
         heroLandscape.style.transform = `scale(1) translateY(${shift}px)`;
+
+        // Opacity: 0.15 at rest → peaks at 0.55 halfway through hero → fades to 0.1 at bottom
+        // Creates a cinematic "reveal as you descend" feel
+        const progress = scrollY / heroHeight; // 0 → 1 as hero scrolls out
+        let opacity;
+        if (progress < 0.5) {
+          // Rising phase: 0.15 → 0.55
+          opacity = 0.15 + progress * 2 * 0.40;
+        } else {
+          // Fading phase: 0.55 → 0.10 as hero exits
+          opacity = 0.55 - (progress - 0.5) * 2 * 0.45;
+        }
+        heroLandscape.style.opacity = Math.max(0.08, opacity);
       }
     }
 
-    window.addEventListener('scroll', updateLandscapeParallax, { passive: true });
-    updateLandscapeParallax();
+    // Only run parallax on pointer (hover) devices — mobile scroll is jerky
+    if (window.matchMedia('(hover: hover)').matches) {
+      window.addEventListener('scroll', updateLandscapeParallax, { passive: true });
+      updateLandscapeParallax();
+    } else {
+      // On touch: just fade in at a comfortable opacity, no parallax
+      heroLandscape.style.opacity = '0.35';
+    }
   }
 
   /* ==========================================================================
@@ -151,6 +170,118 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = `mailto:rosharma0906@gmail.com?subject=${subject}&body=${body}`;
       showToast('Opening email client to send to rosharma0906@gmail.com…');
     });
+  }
+
+  /* ==========================================================================
+     SPOTLIGHT SCROLL — All 4 posts, centre card highlighted
+     ========================================================================== */
+  const carousel  = document.getElementById('postsCarousel');
+  const slides    = carousel ? Array.from(carousel.querySelectorAll('.post-slide')) : [];
+  const dotsWrap  = document.getElementById('carouselDots');
+  const counter   = document.getElementById('carouselCounter');
+  const prevBtn   = document.getElementById('carouselPrev');
+  const nextBtn   = document.getElementById('carouselNext');
+
+  if (carousel && slides.length) {
+    // Build dots
+    const dots = slides.map((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', `Post ${i + 1}`);
+      d.addEventListener('click', () => scrollToSlide(i));
+      if (dotsWrap) dotsWrap.appendChild(d);
+      return d;
+    });
+
+    /** Find which slide is closest to the carousel's horizontal centre */
+    function getActiveIndex() {
+      const carouselRect = carousel.getBoundingClientRect();
+      const centre = carouselRect.left + carouselRect.width / 2;
+      let bestIdx = 0, bestDist = Infinity;
+      slides.forEach((s, i) => {
+        const r = s.getBoundingClientRect();
+        const dist = Math.abs(r.left + r.width / 2 - centre);
+        if (dist < bestDist) { bestDist = dist; bestIdx = i; }
+      });
+      return bestIdx;
+    }
+
+    function updateActive() {
+      const idx = getActiveIndex();
+      slides.forEach((s, i) => s.classList.toggle('is-active', i === idx));
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      if (counter) counter.textContent = `${idx + 1} / ${slides.length}`;
+      if (prevBtn) prevBtn.disabled = idx === 0;
+      if (nextBtn) nextBtn.disabled = idx === slides.length - 1;
+    }
+
+    /** Scroll carousel so slide at index is centred */
+    function scrollToSlide(index) {
+      const slide = slides[index];
+      const carouselRect = carousel.getBoundingClientRect();
+      const slideRect = slide.getBoundingClientRect();
+      const offset = slideRect.left - carouselRect.left
+                   - (carouselRect.width / 2 - slideRect.width / 2);
+      carousel.scrollBy({ left: offset, behavior: 'smooth' });
+    }
+
+    // Arrow buttons
+    if (prevBtn) prevBtn.addEventListener('click', () => {
+      scrollToSlide(Math.max(0, getActiveIndex() - 1));
+    });
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+      scrollToSlide(Math.min(slides.length - 1, getActiveIndex() + 1));
+    });
+
+    carousel.addEventListener('scroll', updateActive, { passive: true });
+
+    // Initialise after layout settles
+    requestAnimationFrame(updateActive);
+  }
+
+    /* ==========================================================================
+     CUSTOM CURSOR — DOT + LERP RING
+     ========================================================================== */
+  const cursorDot  = document.getElementById('cursor-dot');
+  const cursorRing = document.getElementById('cursor-ring');
+
+  // Only activate on pointer devices
+  if (cursorDot && cursorRing && window.matchMedia('(hover: hover)').matches) {
+    let mouseX = 0, mouseY = 0;
+    let ringX  = 0, ringY  = 0;
+    let rafRunning = false;
+
+    // Instantly move dot; ring follows via lerp in rAF
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+      if (!rafRunning) {
+        rafRunning = true;
+        requestAnimationFrame(lerpRing);
+      }
+    });
+
+    function lerpRing() {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
+      // Keep running until ring catches up (within 0.5px)
+      if (Math.abs(mouseX - ringX) > 0.5 || Math.abs(mouseY - ringY) > 0.5) {
+        requestAnimationFrame(lerpRing);
+      } else {
+        rafRunning = false;
+      }
+    }
+
+    // State: contracted over links and buttons
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-on-link'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-on-link'));
+    });
+
+    // Hide default cursor site-wide when custom cursor is active
+    document.body.style.cursor = 'none';
   }
 
   /* ==========================================================================
