@@ -172,13 +172,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ==========================================================================
-     SPOTLIGHT SCROLL — All 4 posts, centre card highlighted
-     ========================================================================== */
+    /* ============================================================================
+      SPOTLIGHT SCROLL — Centered, circular post wheel
+      ============================================================================ */
   const carousel  = document.getElementById('postsCarousel');
   const slides    = carousel ? Array.from(carousel.querySelectorAll('.post-slide')) : [];
   const dotsWrap  = document.getElementById('carouselDots');
-  const counter   = document.getElementById('carouselCounter');
   const prevBtn   = document.getElementById('carouselPrev');
   const nextBtn   = document.getElementById('carouselNext');
 
@@ -210,33 +209,34 @@ document.addEventListener('DOMContentLoaded', () => {
       const idx = getActiveIndex();
       slides.forEach((s, i) => s.classList.toggle('is-active', i === idx));
       dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-      if (counter) counter.textContent = `${idx + 1} / ${slides.length}`;
-      if (prevBtn) prevBtn.disabled = idx === 0;
-      if (nextBtn) nextBtn.disabled = idx === slides.length - 1;
     }
 
     /** Scroll carousel so slide at index is centred */
-    function scrollToSlide(index) {
-      const slide = slides[index];
+    function scrollToSlide(index, behavior = 'smooth') {
+      const normalizedIndex = (index + slides.length) % slides.length;
+      const slide = slides[normalizedIndex];
       const carouselRect = carousel.getBoundingClientRect();
       const slideRect = slide.getBoundingClientRect();
       const offset = slideRect.left - carouselRect.left
                    - (carouselRect.width / 2 - slideRect.width / 2);
-      carousel.scrollBy({ left: offset, behavior: 'smooth' });
+      carousel.scrollBy({ left: offset, behavior });
     }
 
     // Arrow buttons
     if (prevBtn) prevBtn.addEventListener('click', () => {
-      scrollToSlide(Math.max(0, getActiveIndex() - 1));
+      scrollToSlide(getActiveIndex() - 1);
     });
     if (nextBtn) nextBtn.addEventListener('click', () => {
-      scrollToSlide(Math.min(slides.length - 1, getActiveIndex() + 1));
+      scrollToSlide(getActiveIndex() + 1);
     });
 
     carousel.addEventListener('scroll', updateActive, { passive: true });
 
-    // Initialise after layout settles
-    requestAnimationFrame(updateActive);
+    // Start on the middle post so the wheel is centered on first render.
+    requestAnimationFrame(() => {
+      scrollToSlide(Math.floor(slides.length / 2), 'auto');
+      updateActive();
+    });
   }
 
     /* ==========================================================================
