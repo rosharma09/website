@@ -768,7 +768,7 @@ button {
 .post-slide {
   flex: 0 0 260px;
   height: 360px;
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   overflow: hidden;
   position: relative;
   text-decoration: none;
