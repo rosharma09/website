@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rohan Sharma — UGC Travel Creator & Photographer</title>
-  <meta name="description" content="Portfolio of Rohan Sharma — UGC travel creator producing destination photography, reels, and short-form video for brands and tourism partners.">
-  <meta name="keywords" content="Rohan Sharma, UGC Creator, Travel Photographer, Destination Content, Travel Reels, Brand Content">
+  <title>Rohan Sharma — Travel Content Creator | Software Engineer @ Walmart</title>
+  <meta name="description" content="Rohan Sharma — Software engineer at Walmart by day, travel content creator by weekend. Resort, hotel, cafe, nightlife, food, outfit & tech content for brands across India.">
+  <meta name="keywords" content="Rohan Sharma, travel creator, Bangalore, UGC, travel content, tech content, brand collaborations, Walmart, Apple ecosystem, gaming setup, Ooty, Munnar, Goa">
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50 15, 90 85, 10 85' fill='%23ffffff'/></svg>">
@@ -14,6 +14,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&family=Geist:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Motion (Framer Motion) for enhanced animations -->
+  <script src="https://cdn.jsdelivr.net/npm/motion@10.18.0/dist/motion.js"></script>
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -35,14 +41,16 @@
     <div class="container nav-inner">
       <a href="#hero" class="brand-logo" aria-label="Rohan Sharma Home">
         <span class="brand-monogram">RS</span>
-        <span class="brand-name">Rohan Sharma <span class="badge-tag">UGC · Creator</span></span>
+        <span class="brand-name">Rohan Sharma <span class="badge-tag">SWE · Creator</span></span>
       </a>
 
       <!-- Desktop Nav Items -->
       <nav class="nav-links" aria-label="Main Navigation">
-        <a href="#work" class="nav-link">Visuals</a>
         <a href="#about" class="nav-link">About</a>
-        <a href="#inquiry" class="nav-link">Inquiry</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#brands" class="nav-link">For Brands</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </nav>
 
       <!-- Action Group -->
@@ -51,8 +59,8 @@
           <i data-lucide="instagram"></i>
           <span>@_roh_sharma_</span>
         </a>
-        <a href="#inquiry" class="btn btn-white btn-sm">
-          <span>Get in Touch</span>
+        <a href="#contact" class="btn btn-white btn-sm">
+          <span>Work with me</span>
         </a>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
           <i data-lucide="menu" id="menuIcon"></i>
@@ -63,11 +71,13 @@
     <!-- Mobile Drawer -->
     <div class="mobile-drawer" id="mobileDrawer">
       <nav class="mobile-nav">
-        <a href="#work" class="m-link">Visuals & Travel Work</a>
-        <a href="#about" class="m-link">About Rohan</a>
-        <a href="#inquiry" class="m-link">Inquiry & Contact</a>
+        <a href="#about" class="m-link">About</a>
+        <a href="#work" class="m-link">Work</a>
+        <a href="#services" class="m-link">Services</a>
+        <a href="#brands" class="m-link">For Brands</a>
+        <a href="#contact" class="m-link">Contact</a>
         <div class="m-actions">
-          <a href="mailto:rosharma0906@gmail.com" class="btn btn-white w-full mb-2">
+          <a href="mailto:rohan.ugc@outlook.com" class="btn btn-white w-full mb-2">
             <i data-lucide="mail"></i> Email Rohan
           </a>
           <a href="https://www.instagram.com/_roh_sharma_/" target="_blank" class="btn btn-ghost w-full">
@@ -85,23 +95,30 @@
     <div class="hero-landscape-overlay"></div>
 
     <div class="container hero-center" style="position:relative; z-index:2;">
-      
+
       <!-- Status Pill -->
       <div class="shimmer-pill reveal-load delay-1">
         <span class="pulse-dot"></span>
-        <span class="pill-label">UGC Creator · Open to Brand Partnerships</span>
+        <span class="pill-label">Software Engineer @ Walmart · Travel Creator · Open to Brand Work</span>
       </div>
 
       <!-- Main Headline -->
       <h1 class="hero-title reveal-load delay-2">
-        Exploring the world.<br>
-        <span class="gradient-text vercel-title-grad">One frame at a time.</span>
+        I build software by day.<br>
+        <span class="gradient-text vercel-title-grad">I build brands by weekend.</span>
       </h1>
 
       <!-- Bio Tagline -->
       <p class="hero-sub reveal-load delay-3">
-        I make destination content — travel photography, reels, and short-form video — built for brands, hotels, and tourism boards that want to tell a better story.
+        Bangalore-based. Outfit-of-the-location content, resort &amp; cafe reviews, food captures, and tech reviews (full Apple ecosystem + gaming setup). I help hotels, restaurants, fashion and tech brands reach an audience that actually travels.
       </p>
+
+      <!-- Identity Tags -->
+      <div class="hero-tags reveal-load delay-3">
+        <span class="hero-tag"><i data-lucide="code-2"></i> Software Engineer @ Walmart</span>
+        <span class="hero-tag"><i data-lucide="map-pin"></i> Bangalore, India</span>
+        <span class="hero-tag"><i data-lucide="instagram"></i> 1.1K+ community</span>
+      </div>
 
       <!-- Action Buttons -->
       <div class="hero-btn-row reveal-load delay-4">
@@ -109,35 +126,95 @@
           <span>See the Work</span>
           <i data-lucide="arrow-down"></i>
         </a>
-        <a href="#inquiry" class="btn btn-ghost btn-lg">
+        <a href="#contact" class="btn btn-ghost btn-lg">
           <i data-lucide="mail"></i>
-          <span>Send an Inquiry</span>
+          <span>Brand Inquiry</span>
         </a>
       </div>
 
     </div>
   </section>
 
-  <!-- Section 01: Visual Journal — Editorial Bento Grid -->
+  <!-- Section 01: About -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-card spotlight-card reveal">
+        <div class="about-grid">
+
+          <div class="about-avatar-col reveal-child delay-1">
+            <div class="avatar-box">
+              <span class="avatar-initials">RS</span>
+            </div>
+            <div class="avatar-meta">
+              <h3>Rohan Sharma</h3>
+              <a href="https://www.instagram.com/_roh_sharma_/" target="_blank" class="text-muted-link">@_roh_sharma_</a>
+              <div class="avatar-badges">
+                <span class="avatar-badge"><i data-lucide="briefcase"></i> Walmart</span>
+                <span class="avatar-badge"><i data-lucide="map-pin"></i> Bangalore</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-text-col reveal-child delay-2">
+            <div class="section-tag-mono">01 // ABOUT</div>
+            <h2 class="about-heading">Software Engineer. Travel Creator. Brand Partner.</h2>
+            <p class="about-p">
+              I'm <strong>Rohan Sharma</strong> — a software engineer at <strong>Walmart</strong> based in Bangalore. On weekends, I'm a travel content creator documenting the full traveler experience: resorts, hotels, cafes, nightlife, food, outfits, and tech.
+            </p>
+            <p class="about-p">
+              My content sits at the intersection of <strong>aspirational travel</strong> and <strong>authentic lifestyle</strong>. I shoot with an iPhone 15 Pro and a Sony Alpha — the gear of someone who actually travels light.
+            </p>
+            <p class="about-p">
+              Off-grid: I run a complete Apple ecosystem and a gaming setup, and I share honest reviews of both. That's the second lane of my content — <strong>tech that goes places</strong>.
+            </p>
+            <div class="about-tags-row">
+              <span class="a-tag"><i data-lucide="hotel"></i> Hotels &amp; Resorts</span>
+              <span class="a-tag"><i data-lucide="utensils"></i> Cafes &amp; Food</span>
+              <span class="a-tag"><i data-lucide="shirt"></i> Outfits &amp; Apparel</span>
+              <span class="a-tag"><i data-lucide="backpack"></i> Travel Accessories</span>
+              <span class="a-tag"><i data-lucide="laptop"></i> Apple &amp; Tech</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 02: Work — Tabbed Gallery (Travel / Tech / Outfits) -->
   <section class="section moments-section" id="work">
-    <div class="section-header reveal" style="padding: 0 1.5rem; max-width:1100px; margin:0 auto 2.5rem;">
-      <div class="section-tag-mono">01 // SELECTED WORK</div>
-      <h2 class="section-heading">Real Moments, <span class="gradient-text vercel-title-grad">Real Places</span></h2>
-      <p class="section-desc">Photography and video from destinations across India and beyond.</p>
+    <div class="section-header reveal" style="padding: 0 1.5rem; max-width:1100px; margin:0 auto 2rem;">
+      <div class="section-tag-mono">02 // SELECTED WORK</div>
+      <h2 class="section-heading">What I <span class="gradient-text vercel-title-grad">Make</span></h2>
+      <p class="section-desc">Three lanes. One creator. Filter by what you're hiring for.</p>
     </div>
 
-    <!-- Spotlight Scroll — all 4 posts, centre one highlighted -->
-    <div class="spotlight-strip">
+    <!-- Tab Switcher -->
+    <div class="work-tabs reveal">
+      <button class="work-tab active" data-tab="travel">
+        <i data-lucide="mountain"></i>
+        <span>Travel</span>
+      </button>
+      <button class="work-tab" data-tab="tech">
+        <i data-lucide="laptop"></i>
+        <span>Tech</span>
+      </button>
+      <button class="work-tab" data-tab="outfits">
+        <i data-lucide="shirt"></i>
+        <span>Outfits</span>
+      </button>
+    </div>
 
-      <!-- Scrollable track (overflow clips only on X) -->
+    <!-- TAB PANEL: Travel -->
+    <div class="work-panel active" data-panel="travel">
       <div class="posts-carousel-wrap">
         <div class="posts-carousel" id="postsCarousel">
 
           <a class="post-slide" href="https://www.instagram.com/p/DL7ZmekvhfT/" target="_blank" rel="noopener">
             <div class="post-img" style="background-image:url('assets/posts/p1.jpg')"></div>
             <div class="post-info">
-              <span class="post-cat">Mango hill, Ooty</span>
-              <span class="post-title">Misty ridges at dawn</span>
+              <span class="post-cat">Resort, Ooty</span>
+              <span class="post-title">Outfit + misty ridges at dawn</span>
             </div>
             <span class="post-ig-pill"><i data-lucide="instagram"></i> View on Instagram</span>
           </a>
@@ -145,8 +222,8 @@
           <a class="post-slide" href="https://www.instagram.com/p/DH3r3UtTNmh/" target="_blank" rel="noopener">
             <div class="post-img" style="background-image:url('assets/posts/p2.jpg')"></div>
             <div class="post-info">
-              <span class="post-cat">Eden Woods, Munnar</span>
-              <span class="post-title">Golden hour by the Forest</span>
+              <span class="post-cat">Resort, Munnar</span>
+              <span class="post-title">Golden hour by the forest</span>
             </div>
             <span class="post-ig-pill"><i data-lucide="instagram"></i> View on Instagram</span>
           </a>
@@ -154,8 +231,8 @@
           <a class="post-slide" href="https://www.instagram.com/p/DA0LVQEvaoH/" target="_blank" rel="noopener">
             <div class="post-img" style="background-image:url('assets/posts/p3.jpg')"></div>
             <div class="post-info">
-              <span class="post-cat">Village Retreat, Kodaikanal</span>
-              <span class="post-title">Ancient light on stone</span>
+              <span class="post-cat">Heritage stay, Kodaikanal</span>
+              <span class="post-title">Outfit against ancient stone</span>
             </div>
             <span class="post-ig-pill"><i data-lucide="instagram"></i> View on Instagram</span>
           </a>
@@ -163,7 +240,7 @@
           <a class="post-slide" href="https://www.instagram.com/p/Dbk38cXj4tu/" target="_blank" rel="noopener">
             <div class="post-img" style="background-image:url('assets/posts/p4.jpg')"></div>
             <div class="post-info">
-              <span class="post-cat">Destiny, Ooty</span>
+              <span class="post-cat">Resort, Ooty</span>
               <span class="post-title">High peaks, open skies</span>
             </div>
             <span class="post-ig-pill"><i data-lucide="instagram"></i> View on Instagram</span>
@@ -172,7 +249,7 @@
           <a class="post-slide" href="https://www.instagram.com/p/DW3utm_j4sD/" target="_blank" rel="noopener">
             <div class="post-img" style="background-image:url('assets/posts/p5.jpg')"></div>
             <div class="post-info">
-              <span class="post-cat">Saracacorbett, Jim Corbett</span>
+              <span class="post-cat">Jim Corbett</span>
               <span class="post-title">Finding tiger trails</span>
             </div>
             <span class="post-ig-pill"><i data-lucide="instagram"></i> View on Instagram</span>
@@ -181,8 +258,8 @@
           <a class="post-slide" href="https://www.instagram.com/p/DIHGs4VzeKH/" target="_blank" rel="noopener">
             <div class="post-img" style="background-image:url('assets/posts/p6.jpg')"></div>
             <div class="post-info">
-              <span class="post-cat">Tulsi Village Retreat, Munnar</span>
-              <span class="post-title">Disconnect to Reconnect</span>
+              <span class="post-cat">Resort, Munnar</span>
+              <span class="post-title">Disconnect to reconnect</span>
             </div>
             <span class="post-ig-pill"><i data-lucide="instagram"></i> View on Instagram</span>
           </a>
@@ -190,7 +267,7 @@
           <a class="post-slide" href="https://www.instagram.com/p/C-SW_t0oH0J/" target="_blank" rel="noopener">
             <div class="post-img" style="background-image:url('assets/posts/p7.jpg')"></div>
             <div class="post-info">
-              <span class="post-cat">Mojigao, Goa</span>
+              <span class="post-cat">Goa</span>
               <span class="post-title">Coastal vibes</span>
             </div>
             <span class="post-ig-pill"><i data-lucide="instagram"></i> View on Instagram</span>
@@ -199,7 +276,6 @@
         </div>
       </div>
 
-      <!-- Nav sits OUTSIDE the overflow-clipped wrap -->
       <div class="carousel-nav">
         <button class="carousel-btn" id="carouselPrev" aria-label="Previous post">
           <i data-lucide="chevron-left"></i>
@@ -209,49 +285,256 @@
           <i data-lucide="chevron-right"></i>
         </button>
       </div>
+    </div>
 
+    <!-- TAB PANEL: Tech -->
+    <div class="work-panel" data-panel="tech">
+      <div class="tech-grid">
+        <div class="tech-card spotlight-card">
+          <div class="tech-icon"><i data-lucide="smartphone"></i></div>
+          <h3 class="tech-title">iPhone 15 Pro</h3>
+          <p class="tech-desc">Primary camera. Action mode, Cinematic, ProRAW. Shot across 9 destinations and counting.</p>
+        </div>
+        <div class="tech-card spotlight-card">
+          <div class="tech-icon"><i data-lucide="laptop"></i></div>
+          <h3 class="tech-title">MacBook Pro M-series</h3>
+          <p class="tech-desc">On the road edit suite. DaVinci Resolve + Final Cut Pro. Work-from-anywhere content machine.</p>
+        </div>
+        <div class="tech-card spotlight-card">
+          <div class="tech-icon"><i data-lucide="tablet"></i></div>
+          <h3 class="tech-title">iPad Pro + Pencil</h3>
+          <p class="tech-desc">On-trip planning, editing on the go, and reading scripts. The travel creative's secret weapon.</p>
+        </div>
+        <div class="tech-card spotlight-card">
+          <div class="tech-icon"><i data-lucide="watch"></i></div>
+          <h3 class="tech-title">Apple Watch Ultra</h3>
+          <p class="tech-desc">Hike tracking, dive-ready, battery for days. The one piece of gear I never leave behind.</p>
+        </div>
+        <div class="tech-card spotlight-card">
+          <div class="tech-icon"><i data-lucide="headphones"></i></div>
+          <h3 class="tech-title">AirPods Pro + Max</h3>
+          <p class="tech-desc">Flight noise cancellation. Field audio for reels. Two pairs because redundancy is a thing.</p>
+        </div>
+        <div class="tech-card spotlight-card">
+          <div class="tech-icon"><i data-lucide="gamepad-2"></i></div>
+          <h3 class="tech-title">Gaming Setup</h3>
+          <p class="tech-desc">PC + console + peripherals. The second creator lane — honest gaming &amp; workspace content.</p>
+        </div>
+      </div>
+      <p class="tech-note">
+        <i data-lucide="info"></i>
+        Tech content coming soon. Currently open to <strong>Apple ecosystem</strong> and <strong>PC gaming</strong> brand partnerships.
+      </p>
+    </div>
+
+    <!-- TAB PANEL: Outfits -->
+    <div class="work-panel" data-panel="outfits">
+      <div class="outfit-grid">
+        <div class="outfit-card spotlight-card">
+          <div class="outfit-img" style="background-image:url('assets/posts/p1.jpg')"></div>
+          <div class="outfit-meta">
+            <span class="outfit-loc">Ooty</span>
+            <span class="outfit-vibe">Misty morning</span>
+          </div>
+        </div>
+        <div class="outfit-card spotlight-card">
+          <div class="outfit-img" style="background-image:url('assets/posts/p2.jpg')"></div>
+          <div class="outfit-meta">
+            <span class="outfit-loc">Munnar</span>
+            <span class="outfit-vibe">Earth tones</span>
+          </div>
+        </div>
+        <div class="outfit-card spotlight-card">
+          <div class="outfit-img" style="background-image:url('assets/posts/p3.jpg')"></div>
+          <div class="outfit-meta">
+            <span class="outfit-loc">Kodaikanal</span>
+            <span class="outfit-vibe">Heritage fit</span>
+          </div>
+        </div>
+        <div class="outfit-card spotlight-card">
+          <div class="outfit-img" style="background-image:url('assets/posts/p4.jpg')"></div>
+          <div class="outfit-meta">
+            <span class="outfit-loc">Ooty</span>
+            <span class="outfit-vibe">Open skies</span>
+          </div>
+        </div>
+        <div class="outfit-card spotlight-card">
+          <div class="outfit-img" style="background-image:url('assets/posts/p7.jpg')"></div>
+          <div class="outfit-meta">
+            <span class="outfit-loc">Goa</span>
+            <span class="outfit-vibe">Coastal</span>
+          </div>
+        </div>
+        <div class="outfit-card spotlight-card">
+          <div class="outfit-img" style="background-image:url('assets/posts/p6.jpg')"></div>
+          <div class="outfit-meta">
+            <span class="outfit-loc">Munnar</span>
+            <span class="outfit-vibe">Casual travel</span>
+          </div>
+        </div>
+      </div>
+      <p class="tech-note">
+        <i data-lucide="info"></i>
+        Outfit-of-the-location is my signature content. Currently open to <strong>fashion &amp; apparel</strong> and <strong>footwear</strong> brand partnerships.
+      </p>
     </div>
 
     <!-- CTA -->
-    <div class="insta-cta reveal delay-2" style="padding: 0 1.5rem; max-width:1100px; margin:2rem auto 0;">
+    <div class="insta-cta reveal" style="padding: 0 1.5rem; max-width:1100px; margin:2.5rem auto 0;">
       <a href="https://www.instagram.com/_roh_sharma_/" target="_blank" class="btn btn-ghost btn-lg">
         <i data-lucide="instagram"></i>
-        <span>See more work on Instagram</span>
+        <span>See full feed on Instagram</span>
         <i data-lucide="arrow-up-right"></i>
       </a>
     </div>
 
   </section>
 
-  <!-- Section 02: About Rohan -->
-  <section class="section" id="about">
+  <!-- Section 03: Services -->
+  <section class="section" id="services">
     <div class="container">
-      <div class="about-card spotlight-card reveal">
-        <div class="about-grid">
-          
-          <div class="about-avatar-col reveal-child delay-1">
-            <div class="avatar-box">
-              <span class="avatar-initials">RS</span>
+      <div class="section-header reveal" style="padding: 0 1.5rem; max-width:1100px; margin:0 auto 2.5rem;">
+        <div class="section-tag-mono">03 // SERVICES</div>
+        <h2 class="section-heading">How We Can <span class="gradient-text vercel-title-grad">Work Together</span></h2>
+        <p class="section-desc">Three ways to collaborate — pick what fits your brand, or reach out to build something custom.</p>
+      </div>
+
+      <div class="services-grid reveal">
+
+        <div class="service-card spotlight-card reveal-child delay-1">
+          <div class="service-card-badge">Most popular</div>
+          <div class="service-icon">
+            <i data-lucide="map"></i>
+          </div>
+          <h3 class="service-title">Stay + Content</h3>
+          <p class="service-desc">Comp stay at your hotel, resort, or cafe in exchange for curated content — photos, reels, stories, and carousel posts that showcase the experience authentically.</p>
+          <ul class="service-includes">
+            <li><i data-lucide="check"></i> 5-10 photos</li>
+            <li><i data-lucide="check"></i> 2-3 reels</li>
+            <li><i data-lucide="check"></i> Instagram + Stories</li>
+            <li><i data-lucide="check"></i> Geo-tag + highlights</li>
+          </ul>
+          <div class="service-tags">
+            <span class="s-tag">Hotels</span>
+            <span class="s-tag">Resorts</span>
+            <span class="s-tag">Cafes</span>
+            <span class="s-tag">Restaurants</span>
+          </div>
+        </div>
+
+        <div class="service-card spotlight-card reveal-child delay-2">
+          <div class="service-icon">
+            <i data-lucide="camera"></i>
+          </div>
+          <h3 class="service-title">Tech Review</h3>
+          <p class="service-desc">Honest, unboxing + long-form review content. Shot in real environments — desk, travel bag, cafe table. Built for tech brands wanting authentic reach.</p>
+          <ul class="service-includes">
+            <li><i data-lucide="check"></i> Unboxing video</li>
+            <li><i data-lucide="check"></i> 1 honest review reel</li>
+            <li><i data-lucide="check"></i> 5 story slides</li>
+            <li><i data-lucide="check"></i> Carousel breakdown</li>
+          </ul>
+          <div class="service-tags">
+            <span class="s-tag">Apple</span>
+            <span class="s-tag">Gaming</span>
+            <span class="s-tag">Peripherals</span>
+            <span class="s-tag">Wearables</span>
+          </div>
+        </div>
+
+        <div class="service-card spotlight-card reveal-child delay-3">
+          <div class="service-card-badge">Long-term</div>
+          <div class="service-icon">
+            <i data-lucide="handshake"></i>
+          </div>
+          <h3 class="service-title">Brand Partnership</h3>
+          <p class="service-desc">Monthly retainer for ongoing content — outfit posts, travel reels, product features, and story content. The deeper the brand fit, the better the content.</p>
+          <ul class="service-includes">
+            <li><i data-lucide="check"></i> Monthly content plan</li>
+            <li><i data-lucide="check"></i> 8-12 deliverables</li>
+            <li><i data-lucide="check"></i> Stories + Reels</li>
+            <li><i data-lucide="check"></i> Usage rights included</li>
+          </ul>
+          <div class="service-tags">
+            <span class="s-tag">Fashion</span>
+            <span class="s-tag">Apparel</span>
+            <span class="s-tag">Travel</span>
+            <span class="s-tag">DTC Brands</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 04: For Brands -->
+  <section class="section" id="brands">
+    <div class="container">
+      <div class="brands-card spotlight-card reveal">
+        <div class="brands-inner">
+
+          <!-- Left: Value Props -->
+          <div class="brands-left reveal-child delay-1">
+            <div class="section-tag-mono">04 // FOR BRANDS</div>
+            <h2 class="brands-heading">Why work with me?</h2>
+            <p class="brands-desc">
+              I'm not a full-time creator chasing every trend. I'm a working professional with a growing audience and a genuine love for travel. That means <strong>authentic content</strong> — not scripted — and <strong>real engagement</strong> from people who actually explore the world.
+            </p>
+
+            <div class="brand-stats">
+              <div class="stat-item">
+                <span class="stat-number">1.1K+</span>
+                <span class="stat-label">Instagram followers</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Destinations covered</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">10+</span>
+                <span class="stat-label">Resorts &amp; hotels visited</span>
+              </div>
             </div>
-            <div class="avatar-meta">
-              <h3>Rohan Sharma</h3>
-              <a href="https://www.instagram.com/_roh_sharma_/" target="_blank" class="text-muted-link">@_roh_sharma_</a>
+
+            <div class="brand-targets">
+              <p class="targets-label"><i data-lucide="target"></i> Ideal brand fit:</p>
+              <div class="target-tags">
+                <span class="target-tag">Hotels &amp; Resorts</span>
+                <span class="target-tag">Travel Accessories</span>
+                <span class="target-tag">Cafes &amp; Restaurants</span>
+                <span class="target-tag">Fashion &amp; Apparel</span>
+                <span class="target-tag">Footwear</span>
+                <span class="target-tag">Apple Ecosystem</span>
+                <span class="target-tag">Gaming Peripherals</span>
+                <span class="target-tag">DTC Lifestyle Brands</span>
+              </div>
             </div>
           </div>
 
-          <div class="about-text-col reveal-child delay-2">
-            <div class="section-tag-mono">02 // ABOUT_ROHAN</div>
-            <h2 class="about-heading">UGC Creator & Travel Photographer</h2>
-            <p class="about-p">
-              I’m <strong>Rohan Sharma</strong> — a UGC travel creator based in India, producing destination photography and short-form video that brands and tourism partners actually use.
-            </p>
-            <p class="about-p">
-              From high-altitude trails to coastal escapes, I shoot with an eye for what’s authentic — the light, the texture, the moment before it’s gone.
-            </p>
-            <div class="about-tags-row">
-              <span class="a-tag">📍 India & Beyond</span>
-              <span class="a-tag">🎥 Photo + Video</span>
-              <span class="a-tag">🤝 Brand Collaborations</span>
+          <!-- Right: Media Kit CTA -->
+          <div class="brands-right reveal-child delay-2">
+            <div class="mediakit-card">
+              <div class="mediakit-icon">
+                <i data-lucide="file-text"></i>
+              </div>
+              <h3 class="mediakit-title">Media Kit</h3>
+              <p class="mediakit-desc">
+                Download my one-pager with audience stats, past collaborations, content examples, and contact details.
+              </p>
+              <div class="mediakit-actions">
+                <a href="mailto:rohan.ugc@outlook.com?subject=Media Kit Request — Rohan Sharma" class="btn btn-white w-full">
+                  <i data-lucide="download"></i>
+                  <span>Request Media Kit</span>
+                </a>
+                <a href="#contact" class="btn btn-ghost w-full">
+                  <i data-lucide="send"></i>
+                  <span>Send Brief Directly</span>
+                </a>
+              </div>
+              <p class="mediakit-note">
+                <i data-lucide="clock"></i>
+                Response within 24 hours
+              </p>
             </div>
           </div>
 
@@ -260,18 +543,18 @@
     </div>
   </section>
 
-  <!-- Section 03: Simple & Clean Inquiry Tab -->
-  <section class="section" id="inquiry">
+  <!-- Section 05: Contact -->
+  <section class="section" id="contact">
     <div class="container">
       <div class="terminal-card spotlight-card reveal">
         <div class="terminal-grid">
-          
+
           <!-- Left Info -->
           <div class="terminal-info reveal-child delay-1">
-            <div class="section-tag-mono">03 // GET_IN_TOUCH</div>
-            <h2 class="terminal-heading">Let's Connect.</h2>
+            <div class="section-tag-mono">05 // CONTACT</div>
+            <h2 class="terminal-heading">Let's talk brand work.</h2>
             <p class="terminal-desc">
-              Have a project in mind? Whether it's a brand campaign, destination feature, or a long-term content partnership — let's talk.
+              Whether it's a one-off stay + content deal, a tech review, or a longer-term brand partnership — send me a brief and let's see if we're a fit.
             </p>
 
             <div class="terminal-channels">
@@ -279,7 +562,7 @@
                 <i data-lucide="mail"></i>
                 <div>
                   <span class="ch-lbl">PRIMARY EMAIL</span>
-                  <a href="mailto:rosharma0906@gmail.com" class="ch-val">rosharma0906@gmail.com</a>
+                  <a href="mailto:rohan.ugc@outlook.com" class="ch-val">rohan.ugc@outlook.com</a>
                 </div>
               </div>
               <div class="channel-row">
@@ -289,6 +572,18 @@
                   <a href="https://www.instagram.com/_roh_sharma_/" target="_blank" class="ch-val">@_roh_sharma_</a>
                 </div>
               </div>
+              <div class="channel-row">
+                <i data-lucide="linkedin"></i>
+                <div>
+                  <span class="ch-lbl">LINKEDIN</span>
+                  <a href="https://www.linkedin.com/in/rohan-sharma-584177162/" target="_blank" class="ch-val">Connect on LinkedIn</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-note">
+              <i data-lucide="zap"></i>
+              <span>I respond to brand inquiries within <strong>24 hours</strong>. For urgent collabs, DM me on Instagram.</span>
             </div>
           </div>
 
@@ -298,32 +593,40 @@
               <div class="form-row">
                 <div class="form-col">
                   <label for="senderName">YOUR NAME *</label>
-                  <input type="text" id="senderName" required placeholder="e.g. Alex Smith" class="v-input">
+                  <input type="text" id="senderName" required placeholder="e.g. Priya, Brand Manager" class="v-input">
                 </div>
                 <div class="form-col">
                   <label for="senderContact">YOUR EMAIL *</label>
-                  <input type="email" id="senderContact" required placeholder="e.g. alex@example.com" class="v-input">
+                  <input type="email" id="senderContact" required placeholder="e.g. priya@brand.com" class="v-input">
                 </div>
               </div>
 
               <div class="form-group-full">
-                <label for="inquiryType">SUBJECT / INQUIRY TYPE</label>
+                <label for="brandName">BRAND / COMPANY</label>
+                <input type="text" id="brandName" placeholder="e.g. Urbanic, Oyo, boAt" class="v-input">
+              </div>
+
+              <div class="form-group-full">
+                <label for="inquiryType">COLLABORATION TYPE</label>
                 <select id="inquiryType" class="v-input v-select">
-                  <option value="Travel Collaboration & Stays">Travel Collaboration & Stays</option>
-                  <option value="Content Creation & Photography">Content Creation & Photography</option>
-                  <option value="Brand Partnership">Brand Partnership</option>
+                  <option value="Stay + Content (Hotel / Resort / Cafe)">Stay + Content (Hotel / Resort / Cafe)</option>
+                  <option value="Tech Review (Apple / Gaming / Peripherals)">Tech Review (Apple / Gaming / Peripherals)</option>
+                  <option value="Outfit + Apparel Collaboration">Outfit + Apparel Collaboration</option>
+                  <option value="Travel Accessory Feature">Travel Accessory Feature</option>
+                  <option value="Brand Ambassador / Long-term Partnership">Brand Ambassador / Long-term Partnership</option>
+                  <option value="Media Kit Request">Media Kit Request</option>
                   <option value="General Inquiry / Hello">General Inquiry / Hello</option>
                 </select>
               </div>
 
               <div class="form-group-full">
-                <label for="projectDetails">MESSAGE</label>
-                <textarea id="projectDetails" rows="3" placeholder="Write your message here..." class="v-input v-textarea" required></textarea>
+                <label for="projectDetails">YOUR BRIEF</label>
+                <textarea id="projectDetails" rows="4" placeholder="Tell me about your brand, what you're looking for, and any specifics (dates, deliverables, budget range)..." class="v-input v-textarea" required></textarea>
               </div>
 
               <button type="submit" class="btn btn-white w-full btn-lg">
                 <i data-lucide="send"></i>
-                <span>Send Message to rosharma0906@gmail.com</span>
+                <span>Send Brief to Rohan</span>
               </button>
             </form>
           </div>
@@ -333,7 +636,7 @@
     </div>
   </section>
 
-  <!-- Vercel Minimalist Clean Footer -->
+  <!-- Footer -->
   <footer class="vercel-footer">
     <div class="container footer-row">
       <div class="footer-brand">
@@ -343,10 +646,12 @@
 
       <div class="footer-nav">
         <a href="https://www.instagram.com/_roh_sharma_/" target="_blank">Instagram</a>
-        <a href="mailto:rosharma0906@gmail.com">rosharma0906@gmail.com</a>
+        <a href="https://www.linkedin.com/in/rohan-sharma-584177162/" target="_blank">LinkedIn</a>
+        <a href="mailto:rohan.ugc@outlook.com">rohan.ugc@outlook.com</a>
       </div>
 
       <div class="footer-meta">
+        <span>Software Engineer @ Walmart · Bangalore · India</span>
         <span>© 2026 Rohan Sharma</span>
       </div>
     </div>
