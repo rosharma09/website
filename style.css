@@ -1521,30 +1521,45 @@ body.cursor-on-link #cursor-ring {
   line-height: 1.55;
 }
 
-.tech-note {
+.tab-note {
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
+  align-items: flex-start;
+  gap: 0.75rem;
   max-width: 800px;
   margin: 2rem auto 0;
-  padding: 0.85rem 1.15rem;
+  padding: 1rem 1.25rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   font-size: 0.85rem;
   color: var(--text-muted);
+  line-height: 1.6;
 }
 
-.tech-note i {
+.tab-note i {
   width: 16px;
   height: 16px;
   color: var(--text-subtle);
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
-.tech-note strong {
+.tab-note strong {
   color: #fff;
   font-weight: 600;
+}
+
+.tab-note-title {
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.15rem;
+  font-size: 0.88rem;
+}
+
+.tab-note-body {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.55;
 }
 
 /* Outfit Grid */
@@ -1903,4 +1918,152 @@ body.cursor-on-link #cursor-ring {
   .mediakit-card { padding: 1.5rem 1.25rem; }
   .stat-item { padding: 0.4rem 0; border-bottom: 1px solid var(--border-subtle); }
   .stat-item:last-child { border-bottom: none; }
+}
+
+/* ==========================================================================
+   MOBILE PERFORMANCE & SMOOTHNESS
+   - Touch devices: kill heavy hover/animation effects that cause jank
+   - Better text rendering on small screens
+   - iOS Safari-specific fixes (overscroll, font zoom, safe areas)
+   ========================================================================== */
+
+@media (hover: none) {
+  /* Remove the spotlight radial hover on touch — it never activates anyway,
+     but the gradient + transform composite is expensive */
+  .spotlight-card::before,
+  .service-card::before {
+    display: none;
+  }
+
+  /* Disable hover lift transforms on touch — they're the #1 jank source */
+  .spotlight-card:hover,
+  .service-card:hover,
+  .outfit-card:hover,
+  .btn-white:hover,
+  .btn-ghost:hover {
+    transform: none;
+  }
+
+  /* Keep the border-color change (cheap) but skip the shadow */
+  .spotlight-card:hover {
+    box-shadow: none;
+  }
+
+  /* Tech cards: keep subtle interaction but skip the lift */
+  .tech-card:hover {
+    transform: none;
+  }
+}
+
+/* iOS safe-area insets (notch, dynamic island) — push bottom CTA + footer up */
+@supports (padding: max(0px)) {
+  .vercel-footer {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+  .vercel-nav {
+    padding-top: env(safe-area-inset-top);
+    height: calc(64px + env(safe-area-inset-top));
+  }
+  .nav-inner {
+    height: 100%;
+  }
+}
+
+/* Prevent iOS from zooming form inputs on focus (font-size 16px minimum) */
+@media (max-width: 640px) {
+  .v-input,
+  .v-select,
+  .v-textarea {
+    font-size: 16px;
+  }
+
+  /* Smoother font rendering */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Reduce hero section top padding on small screens to avoid big empty space */
+  .hero-section { padding-top: 4rem; }
+  .hero-title { line-height: 1.18; }
+
+  /* Hero landscape: even more compressed on mobile, no blur transitions */
+  .hero-landscape {
+    transition: none;
+    will-change: auto;
+  }
+
+  /* Posts carousel: easier swipe target */
+  .post-slide {
+    will-change: auto;
+  }
+
+  /* Work tabs: full width on tiny screens */
+  .work-tabs {
+    gap: 0.4rem;
+  }
+  .work-tab {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  /* Tighter service card padding on mobile */
+  .service-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  /* Tech note: stack icon above text for better mobile alignment */
+  .tab-note {
+    padding: 0.85rem 1rem;
+    font-size: 0.82rem;
+  }
+  .tab-note-title { font-size: 0.85rem; }
+  .tab-note-body { font-size: 0.78rem; }
+
+  /* Outfit cards: maintain aspect ratio on mobile */
+  .outfit-img {
+    height: 240px;
+  }
+
+  /* Hero tags: prevent overflow */
+  .hero-tags {
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+  .hero-tag {
+    font-size: 0.68rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  /* Avatar: smaller on mobile */
+  .avatar-box {
+    width: 80px;
+    height: 80px;
+  }
+  .avatar-initials { font-size: 1.6rem; }
+}
+
+/* Tablet (641-900px) */
+@media (min-width: 641px) and (max-width: 900px) {
+  .hero-tags {
+    font-size: 0.7rem;
+  }
+  .outfit-img {
+    height: 220px;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero-landscape {
+    transform: none !important;
+  }
 }

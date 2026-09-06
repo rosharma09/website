@@ -1,0 +1,71 @@
+{
+  "posts": [
+    {
+      "id": "p1",
+      "category": "travel",
+      "location": "Resort, Ooty",
+      "title": "Outfit + misty ridges at dawn",
+      "image": "assets/posts/p1.jpg",
+      "url": "https://www.instagram.com/p/DL7ZmekvhfT/",
+      "date": "2026-08-01"
+    },
+    {
+      "id": "p2",
+      "category": "travel",
+      "location": "Resort, Munnar",
+      "title": "Golden hour by the forest",
+      "image": "assets/posts/p2.jpg",
+      "url": "https://www.instagram.com/p/DH3r3UtTNmh/",
+      "date": "2026-07-15"
+    },
+    {
+      "id": "p3",
+      "category": "outfit",
+      "location": "Heritage stay, Kodaikanal",
+      "title": "Outfit against ancient stone",
+      "image": "assets/posts/p3.jpg",
+      "url": "https://www.instagram.com/p/DA0LVQEvaoH/",
+      "date": "2026-06-20"
+    },
+    {
+      "id": "p4",
+      "category": "travel",
+      "location": "Resort, Ooty",
+      "title": "High peaks, open skies",
+      "image": "assets/posts/p4.jpg",
+      "url": "https://www.instagram.com/p/Dbk38cXj4tu/",
+      "date": "2026-05-10"
+    },
+    {
+      "id": "p5",
+      "category": "travel",
+      "location": "Jim Corbett",
+      "title": "Finding tiger trails",
+      "image": "assets/posts/p5.jpg",
+      "url": "https://www.instagram.com/p/DW3utm_j4sD/",
+      "date": "2026-04-05"
+    },
+    {
+      "id": "p6",
+      "category": "travel",
+      "location": "Resort, Munnar",
+      "title": "Disconnect to reconnect",
+      "image": "assets/posts/p6.jpg",
+      "url": "https://www.instagram.com/p/DIHGs4VzeKH/",
+      "date": "2026-03-18"
+    },
+    {
+      "id": "p7",
+      "category": "outfit",
+      "location": "Goa",
+      "title": "Coastal vibes",
+      "image": "assets/posts/p7.jpg",
+      "url": "https://www.instagram.com/p/C-SW_t0oH0J/",
+      "date": "2026-01-28"
+    }
+  ],
+  "meta": {
+    "lastUpdated": "2026-09-06",
+    "note": "Update this file manually or use the Instagram Bookmarklet. See SETUP.md for instructions."
+  }
+}
