@@ -1521,30 +1521,45 @@ body.cursor-on-link #cursor-ring {
   line-height: 1.55;
 }
 
-.tech-note {
+.tab-note {
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
+  align-items: flex-start;
+  gap: 0.75rem;
   max-width: 800px;
   margin: 2rem auto 0;
-  padding: 0.85rem 1.15rem;
+  padding: 1rem 1.25rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   font-size: 0.85rem;
   color: var(--text-muted);
+  line-height: 1.6;
 }
 
-.tech-note i {
+.tab-note i {
   width: 16px;
   height: 16px;
   color: var(--text-subtle);
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
-.tech-note strong {
+.tab-note strong {
   color: #fff;
   font-weight: 600;
+}
+
+.tab-note-title {
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.15rem;
+  font-size: 0.88rem;
+}
+
+.tab-note-body {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.55;
 }
 
 /* Outfit Grid */
@@ -1903,4 +1918,322 @@ body.cursor-on-link #cursor-ring {
   .mediakit-card { padding: 1.5rem 1.25rem; }
   .stat-item { padding: 0.4rem 0; border-bottom: 1px solid var(--border-subtle); }
   .stat-item:last-child { border-bottom: none; }
+}
+
+/* ==========================================================================
+   MOBILE PERFORMANCE & SMOOTHNESS
+   - Touch devices: kill heavy hover/animation effects that cause jank
+   - Better text rendering on small screens
+   - iOS Safari-specific fixes (overscroll, font zoom, safe areas)
+   ========================================================================== */
+
+@media (hover: none) {
+  /* Remove the spotlight radial hover on touch — it never activates anyway,
+     but the gradient + transform composite is expensive */
+  .spotlight-card::before,
+  .service-card::before {
+    display: none;
+  }
+
+  /* Disable hover lift transforms on touch — they're the #1 jank source */
+  .spotlight-card:hover,
+  .service-card:hover,
+  .outfit-card:hover,
+  .btn-white:hover,
+  .btn-ghost:hover {
+    transform: none;
+  }
+
+  /* Keep the border-color change (cheap) but skip the shadow */
+  .spotlight-card:hover {
+    box-shadow: none;
+  }
+
+  /* Tech cards: keep subtle interaction but skip the lift */
+  .tech-card:hover {
+    transform: none;
+  }
+}
+
+/* iOS safe-area insets (notch, dynamic island) — push bottom CTA + footer up */
+@supports (padding: max(0px)) {
+  .vercel-footer {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+  .vercel-nav {
+    padding-top: env(safe-area-inset-top);
+    height: calc(64px + env(safe-area-inset-top));
+  }
+  .nav-inner {
+    height: 100%;
+  }
+}
+
+/* Prevent iOS from zooming form inputs on focus (font-size 16px minimum) */
+@media (max-width: 640px) {
+  .v-input,
+  .v-select,
+  .v-textarea {
+    font-size: 16px;
+  }
+
+  /* Smoother font rendering */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Reduce hero section top padding on small screens to avoid big empty space */
+  .hero-section { padding-top: 4rem; }
+  .hero-title { line-height: 1.18; }
+
+  /* Hero landscape: even more compressed on mobile, no blur transitions */
+  .hero-landscape {
+    transition: none;
+    will-change: auto;
+  }
+
+  /* Posts carousel: easier swipe target */
+  .post-slide {
+    will-change: auto;
+  }
+
+  /* Work tabs: full width on tiny screens */
+  .work-tabs {
+    gap: 0.4rem;
+  }
+  .work-tab {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  /* Tighter service card padding on mobile */
+  .service-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  /* Tech note: stack icon above text for better mobile alignment */
+  .tab-note {
+    padding: 0.85rem 1rem;
+    font-size: 0.82rem;
+  }
+  .tab-note-title { font-size: 0.85rem; }
+  .tab-note-body { font-size: 0.78rem; }
+
+  /* Outfit cards: maintain aspect ratio on mobile */
+  .outfit-img {
+    height: 240px;
+  }
+
+  /* Hero tags: prevent overflow */
+  .hero-tags {
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+  .hero-tag {
+    font-size: 0.68rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  /* Avatar: smaller on mobile */
+  .avatar-box {
+    width: 80px;
+    height: 80px;
+  }
+  .avatar-initials { font-size: 1.6rem; }
+}
+
+/* Tablet (641-900px) */
+/* ==========================================================================
+   COLLABORATIONS / TRUSTED BY SECTION
+   ========================================================================== */
+
+.collaborations-section {
+  padding: 4rem 0;
+  background: rgba(255, 255, 255, 0.01);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.collaborations-track {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  flex-wrap: wrap;
+}
+
+.collab-card {
+  flex: 1;
+  min-width: 200px;
+  max-width: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-normal), transform var(--transition-normal);
+}
+
+.collab-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+.collab-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+}
+
+.collab-logo-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 1.25rem;
+}
+
+.collab-logo-text {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.collab-logo-sub {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--text-subtle);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.collab-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.collab-type {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+.collab-year {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text-subtle);
+  font-weight: 600;
+}
+
+.collab-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.collab-cta i {
+  width: 14px;
+  height: 14px;
+  color: var(--text-subtle);
+}
+
+.collab-cta a {
+  color: #fff;
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.collab-cta a:hover {
+  color: var(--text-muted);
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .collaborations-track {
+    gap: 0.75rem;
+  }
+  .collab-card {
+    min-width: 160px;
+    max-width: 100%;
+    padding: 1.25rem 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .collaborations-track {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .collab-card {
+    width: 100%;
+    max-width: 400px;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+  }
+  .collab-logo-wrap {
+    margin-bottom: 0;
+    flex: 1;
+  }
+  .collab-meta {
+    border-top: none;
+    padding-top: 0;
+    border-left: 1px solid var(--border-subtle);
+    padding-left: 1rem;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.2rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .hero-tags {
+    font-size: 0.7rem;
+  }
+  .outfit-img {
+    height: 220px;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero-landscape {
+    transform: none !important;
+  }
 }
