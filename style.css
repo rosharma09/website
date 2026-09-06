@@ -1042,6 +1042,102 @@ body.cursor-on-link #cursor-ring {
 }
 
 /* ==========================================================================
+   SERVICES SECTION
+   ========================================================================== */
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 0 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.service-card {
+  background: var(--surface-bg, rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 2rem 1.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.06),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+.service-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.service-icon i {
+  width: 22px;
+  height: 22px;
+  color: #fff;
+}
+
+.service-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+  color: #fff;
+}
+
+.service-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.s-tag {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-subtle);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
    INQUIRY SECTION
    ========================================================================== */
 
@@ -1195,6 +1291,7 @@ body.cursor-on-link #cursor-ring {
   .insta-grid { grid-template-columns: repeat(2, 1fr); }
   .insta-card-wide { grid-column: span 2; }
   .terminal-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
 
   /* Reduce section breathing room on tablet */
   .section { padding: 4rem 0; }
@@ -1247,4 +1344,563 @@ body.cursor-on-link #cursor-ring {
   .hero-landscape {
     background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=75&auto=format&fit=crop');
   }
+}
+
+/* ==========================================================================
+   HERO IDENTITY TAGS (Software Engineer · Bangalore · 1.1K+)
+   ========================================================================== */
+
+.hero-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: -1rem auto 1.75rem;
+  max-width: 640px;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+}
+
+.hero-tag i {
+  width: 12px;
+  height: 12px;
+  color: var(--text-subtle);
+}
+
+/* ==========================================================================
+   ABOUT SECTION — Avatar Badges
+   ========================================================================== */
+
+.avatar-badges {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.avatar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-subtle);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-pill);
+}
+
+.avatar-badge i {
+  width: 10px;
+  height: 10px;
+}
+
+/* ==========================================================================
+   WORK SECTION — Tabbed Gallery
+   ========================================================================== */
+
+.work-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0 auto 2.5rem;
+  padding: 0 1.5rem;
+  max-width: 1100px;
+  flex-wrap: wrap;
+}
+
+.work-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.work-tab:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.work-tab.active {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+.work-tab i {
+  width: 15px;
+  height: 15px;
+}
+
+.work-panel {
+  display: none;
+  animation: panel-fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.work-panel.active {
+  display: block;
+}
+
+@keyframes panel-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tech Grid */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.tech-card {
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tech-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 0.6rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.tech-icon i {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+}
+
+.tech-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.tech-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.tech-note {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  max-width: 800px;
+  margin: 2rem auto 0;
+  padding: 0.85rem 1.15rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.tech-note i {
+  width: 16px;
+  height: 16px;
+  color: var(--text-subtle);
+  flex-shrink: 0;
+}
+
+.tech-note strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Outfit Grid */
+.outfit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.outfit-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.outfit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+.outfit-img {
+  height: 280px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+
+.outfit-card:hover .outfit-img {
+  transform: scale(1.05);
+}
+
+.outfit-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.15rem;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.outfit-loc {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.outfit-vibe {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ==========================================================================
+   SERVICES SECTION — Enhanced
+   ========================================================================== */
+
+.service-card-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.62rem;
+  color: #000;
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.service-includes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 1.25rem;
+}
+
+.service-includes li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.service-includes li i {
+  width: 14px;
+  height: 14px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   FOR BRANDS SECTION
+   ========================================================================== */
+
+.brands-card {
+  padding: 3rem 2.5rem;
+}
+
+.brands-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.brands-heading {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+.brands-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 2rem;
+}
+
+.brands-desc strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Stats row */
+.brand-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  font-family: 'Geist Mono', monospace;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Brand target tags */
+.brand-targets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.targets-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.targets-label i {
+  width: 14px;
+  height: 14px;
+}
+
+.target-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.target-tag {
+  font-size: 0.78rem;
+  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-pill);
+}
+
+/* Media Kit card */
+.mediakit-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.75rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mediakit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.mediakit-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  position: relative;
+}
+
+.mediakit-icon i {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+}
+
+.mediakit-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  position: relative;
+}
+
+.mediakit-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.mediakit-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.mediakit-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-subtle);
+  margin: 0 auto;
+  position: relative;
+}
+
+.mediakit-note i {
+  width: 12px;
+  height: 12px;
+}
+
+/* ==========================================================================
+   CONTACT SECTION — Enhanced
+   ========================================================================== */
+
+.contact-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.contact-note i {
+  width: 16px;
+  height: 16px;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.contact-note strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   FOOTER — Enhanced
+   ========================================================================== */
+
+.footer-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-end;
+}
+
+.footer-meta span:first-child {
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   RESPONSIVE — New Sections
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .brands-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .tech-grid { grid-template-columns: repeat(2, 1fr); }
+  .outfit-grid { grid-template-columns: repeat(2, 1fr); }
+  .brand-stats { grid-template-columns: 1fr; gap: 0.75rem; }
+  .stat-item { flex-direction: row; justify-content: space-between; text-align: left; }
+  .footer-meta { align-items: center; }
+}
+
+@media (max-width: 640px) {
+  .tech-grid { grid-template-columns: 1fr; }
+  .outfit-grid { grid-template-columns: 1fr; }
+  .hero-tags { font-size: 0.68rem; }
+  .brands-card { padding: 2rem 1.5rem; }
+  .mediakit-card { padding: 1.5rem 1.25rem; }
+  .stat-item { padding: 0.4rem 0; border-bottom: 1px solid var(--border-subtle); }
+  .stat-item:last-child { border-bottom: none; }
 }

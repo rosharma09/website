@@ -1,12 +1,109 @@
 /**
  * ROHAN SHARMA (@_ROH_SHARMA_) — VERCEL / GEIST MINIMAL ENGINE
- * Hero Landscape Parallax · Bidirectional Scroll Reveal · Spotlight Cursor · Email Dispatch
+ * Software Engineer @ Walmart · Travel Creator · 3-Tab Work Gallery · Brand Inquiry System
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize Lucide Icons
   if (window.lucide) {
     window.lucide.createIcons();
+  }
+
+  /* ==========================================================================
+     WORK SECTION — Tab Switching (Travel / Tech / Outfits)
+     ========================================================================== */
+  const workTabs = document.querySelectorAll('.work-tab');
+  const workPanels = document.querySelectorAll('.work-panel');
+
+  workTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+
+      // Update active tab
+      workTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Show matching panel
+      workPanels.forEach(panel => {
+        if (panel.dataset.panel === target) {
+          panel.classList.add('active');
+        } else {
+          panel.classList.remove('active');
+        }
+      });
+
+      // Re-trigger Lucide icons (in case they're not in the new panel)
+      if (window.lucide) window.lucide.createIcons();
+    });
+  });
+
+  /* ==========================================================================
+     MOTION (Framer Motion / Motion library) — SCROLL-TRIGGERED ANIMATIONS
+     ========================================================================== */
+  if (window.Motion) {
+    const { animate, inView, scroll } = window.Motion;
+
+    // 1) Animate .reveal elements when they enter the viewport
+    document.querySelectorAll('.reveal').forEach(el => {
+      inView(el, ({ target }) => {
+        animate(
+          target,
+          { opacity: [0, 1], y: [28, 0], filter: ['blur(6px)', 'blur(0px)'] },
+          { duration: 0.7, easing: [0.4, 0, 0.2, 1] }
+        );
+        return () => {}; // run once
+      }, { margin: '0px 0px -10% 0px' });
+    });
+
+    // 2) Animate staggered children (.reveal-child) with parent context
+    document.querySelectorAll('.about-card, .terminal-card, .services-grid').forEach(parent => {
+      inView(parent, ({ target }) => {
+        animate(
+          target.querySelectorAll('.reveal-child'),
+          { opacity: [0, 1], y: [20, 0], filter: ['blur(4px)', 'blur(0px)'] },
+          { duration: 0.65, delay: (i) => i * 0.12, easing: [0.4, 0, 0.2, 1] }
+        );
+        return () => {};
+      }, { margin: '0px 0px -10% 0px' });
+    });
+
+    // 3) Animate post cards in the spotlight carousel on scroll
+    document.querySelectorAll('.post-slide').forEach((slide, idx) => {
+      inView(slide, ({ target }) => {
+        animate(
+          target,
+          { opacity: [0, 1], scale: [0.92, 1], filter: ['blur(8px)', 'blur(0px)'] },
+          { duration: 0.8, delay: (idx % 3) * 0.08, easing: [0.4, 0, 0.2, 1] }
+        );
+        return () => {};
+      }, { margin: '0px 0px -5% 0px' });
+    });
+
+    // 4) Hero load sequence using Motion (smoother than CSS keyframes)
+    document.querySelectorAll('.reveal-load').forEach(el => {
+      const delays = ['delay-1', 'delay-2', 'delay-3', 'delay-4'];
+      const delayIdx = delays.findIndex(d => el.classList.contains(d));
+      animate(
+        el,
+        { opacity: [0, 1], y: [18, 0] },
+        { duration: 0.7, delay: delayIdx >= 0 ? delayIdx * 0.12 : 0, easing: [0.4, 0, 0.2, 1] }
+      );
+    });
+
+    // 5) Scroll-driven parallax on service cards
+    document.querySelectorAll('.service-card').forEach(card => {
+      if (typeof scroll === 'function') {
+        scroll(
+          ({ y }) => {
+            const rect = card.getBoundingClientRect();
+            const center = rect.top + rect.height / 2 - window.innerHeight / 2;
+            const offset = Math.max(-20, Math.min(20, -center * 0.05));
+            card.style.transform = `translateY(${offset}px)`;
+          },
+          { target: card }
+        );
+      }
+    });
   }
 
   /* ==========================================================================
@@ -167,8 +264,8 @@ document.addEventListener('DOMContentLoaded', () => {
         `Best regards,\n${name}`
       );
 
-      window.location.href = `mailto:rosharma0906@gmail.com?subject=${subject}&body=${body}`;
-      showToast('Opening email client to send to rosharma0906@gmail.com…');
+      window.location.href = `mailto:rohan.ugc@outlook.com?subject=${subject}&body=${body}`;
+      showToast('Opening email client to send to rohan.ugc@outlook.com…');
     });
   }
 
