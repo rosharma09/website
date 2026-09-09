@@ -191,9 +191,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (navbar) {
       if (window.scrollY > 20) {
-        navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+        navbar.style.background = 'rgba(20, 20, 20, 0.95)';
       } else {
-        navbar.style.background = 'rgba(0, 0, 0, 0.85)';
+        navbar.style.background = 'rgba(26, 26, 26, 0.85)';
       }
     }
   }, { passive: true });
@@ -380,6 +380,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hide default cursor site-wide when custom cursor is active
     document.body.style.cursor = 'none';
   }
+
+  /* ==========================================================================
+     SECTION FADE-IN ON SCROLL (SKILL pattern: opacity + transform only)
+     ========================================================================== */
+  const fadeSections = document.querySelectorAll('.section-fade');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  fadeSections.forEach(el => sectionObserver.observe(el));
 
   /* ==========================================================================
      TOAST NOTIFICATION HELPER

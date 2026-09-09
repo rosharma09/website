@@ -4,17 +4,17 @@
    ========================================================================== */
 
 :root {
-  /* Vercel Pure Monochromatic System */
-  --bg-black: #000000;
-  --bg-surface: #0A0A0A;
-  --bg-card: rgba(10, 10, 10, 0.75);
-  --bg-card-hover: #111111;
-  --bg-glass: rgba(0, 0, 0, 0.85);
+  /* Vercel Pure Monochromatic System — softened for brand interactions */
+  --bg-black: #1A1A1A;
+  --bg-surface: #222222;
+  --bg-card: rgba(26, 26, 26, 0.75);
+  --bg-card-hover: #2A2A2A;
+  --bg-glass: rgba(20, 20, 20, 0.85);
 
-  /* Borders & Accents */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-card: rgba(255, 255, 255, 0.12);
-  --border-bright: rgba(255, 255, 255, 0.35);
+  /* Borders & Accents — boosted for lighter background */
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-card: rgba(255, 255, 255, 0.18);
+  --border-bright: rgba(255, 255, 255, 0.4);
 
   /* Typography */
   --text-white: #EDEDED;
@@ -30,6 +30,16 @@
   --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-reveal: 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* === SKILL Easing Reference (from Emil Kowalski's "Animations on the Web") === */
+  --ease-out-quint: cubic-bezier(.23, 1, .32, 1);
+  --ease-in-out-cubic: cubic-bezier(.645, .045, .355, 1);
+  --ease-out-cubic: cubic-bezier(.33, 1, .68, 1);
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-hover: 150ms;
+  --duration-enter: 250ms;
+  --duration-exit: 180ms;
+  --duration-reveal: 700ms;
 }
 
 /* Base Resets */
@@ -49,6 +59,9 @@ html {
 body {
   font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg-black);
+  /* Warm radial gradient for depth — visible warmth at top, dark base */
+  background-image: radial-gradient(ellipse at 50% -10%, #2A2220 0%, #1E1A18 40%, var(--bg-black) 100%);
+  background-attachment: fixed;
   color: var(--text-white);
   line-height: 1.6;
   overflow-x: hidden;
@@ -75,12 +88,12 @@ body {
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-/* Hero Load Fade-In */
+/* Hero Load Fade-In (SKILL: ease-out quint, transform+opacity only) */
 .reveal-load {
   opacity: 0;
   transform: translateY(20px);
   filter: blur(4px);
-  animation: reveal-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: reveal-in 0.85s var(--ease-out-quint) forwards;
 }
 
 @keyframes reveal-in {
@@ -195,7 +208,7 @@ button {
 }
 
 .vercel-title-grad {
-  background-image: linear-gradient(180deg, #FFFFFF 0%, #888888 100%);
+  background-image: linear-gradient(180deg, #FFFFFF 0%, #F0E8E0 100%);
 }
 
 /* Spotlight Card */
@@ -263,7 +276,7 @@ button {
   background: #FFFFFF;
   color: #000000;
   font-weight: 600;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2), 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 200, 140, 0.08);
 }
 
 .btn-white:hover {
@@ -282,6 +295,107 @@ button {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.3);
   color: #fff;
+}
+
+/* ── Button Press (SKILL pattern) ───────────────────────── */
+.btn:active {
+  transform: scale(0.96);
+  transition-duration: 80ms;
+}
+
+/* ── Card Hover Lift — enhanced with skill easing ───────── */
+.spotlight-card {
+  transition: transform var(--duration-enter) var(--ease-out-quint),
+              box-shadow var(--duration-enter) var(--ease-out-quint),
+              border-color var(--duration-enter) var(--ease-out-quint),
+              background var(--duration-hover) var(--ease);
+}
+
+.spotlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Staggered Reveal ───────────────────────────────────── */
+.stagger-in {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: stagger-reveal-in 0.55s var(--ease-out-quint) forwards;
+}
+
+@keyframes stagger-reveal-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-1 { animation-delay: 0.06s; }
+.stagger-2 { animation-delay: 0.14s; }
+.stagger-3 { animation-delay: 0.22s; }
+.stagger-4 { animation-delay: 0.30s; }
+.stagger-5 { animation-delay: 0.38s; }
+.stagger-6 { animation-delay: 0.46s; }
+
+/* ── Section Fade-In on Scroll (SKILL: transform + opacity only) ── */
+.section-fade {
+  opacity: 0;
+  transform: translateY(32px) scale(0.98);
+  transition: opacity var(--duration-reveal) var(--ease-out-quint),
+              transform var(--duration-reveal) var(--ease-out-quint);
+}
+.section-fade.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ── Image Zoom on Hover (skill: only animate transform) ── */
+.insta-thumb,
+.outfit-img {
+  transition: transform 0.5s var(--ease-out-quint);
+  will-change: transform;
+}
+
+/* ── Shimmer Border Animation (brand feel) ──────────── */
+@keyframes border-shimmer {
+  0%   { border-color: rgba(255, 255, 255, 0.08); }
+  50%  { border-color: rgba(255, 255, 255, 0.2); }
+  100% { border-color: rgba(255, 255, 255, 0.08); }
+}
+
+.brands-card {
+  animation: border-shimmer 6s ease-in-out infinite;
+}
+
+/* ── Subtle Float for Hero Orbs ─────────────────────── */
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(-8px, -12px); }
+}
+
+.spotlight-orb {
+  animation: float-slow 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ── Warm Ambient Glow — brand-facing warmth ────────── */
+.ambient-warm-glow {
+  position: fixed;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(255, 200, 140, 0.06) 0%, rgba(255, 200, 140, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: warm-glow-pulse 10s ease-in-out infinite;
+  will-change: opacity;
+}
+
+@keyframes warm-glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 0.8; }
 }
 
 /* ==========================================================================
@@ -447,13 +561,20 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-card);
   padding: 0.35rem 0.9rem;
   border-radius: var(--radius-pill);
   font-size: 0.78rem;
   font-family: 'Geist Mono', monospace;
   margin-bottom: 1.75rem;
+  box-shadow: 0 0 20px rgba(255, 200, 140, 0.05);
+  animation: pill-glow 4s ease-in-out infinite;
+}
+
+@keyframes pill-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 200, 140, 0.03); }
+  50%      { box-shadow: 0 0 30px rgba(255, 200, 140, 0.08); }
 }
 
 .pulse-dot {
@@ -1061,7 +1182,10 @@ body.cursor-on-link #cursor-ring {
   padding: 2rem 1.75rem;
   position: relative;
   overflow: hidden;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+  transition: transform var(--duration-enter) var(--ease-out-quint),
+              border-color var(--duration-enter) var(--ease-out-quint),
+              box-shadow var(--duration-enter) var(--ease-out-quint);
+  will-change: transform;
 }
 
 .service-card::before {
@@ -1262,7 +1386,7 @@ body.cursor-on-link #cursor-ring {
 }
 
 .toast {
-  background: #111111;
+  background: #1A1A1A;
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
   padding: 0.75rem 1.1rem;
@@ -2235,5 +2359,16 @@ body.cursor-on-link #cursor-ring {
   }
   .hero-landscape {
     transform: none !important;
+  }
+  .brands-card,
+  .spotlight-orb {
+    animation: none !important;
+  }
+  .stagger-in,
+  .section-fade,
+  .reveal-load {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 }
